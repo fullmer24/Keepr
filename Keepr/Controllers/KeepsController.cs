@@ -36,10 +36,6 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-
-
-
         [HttpGet]
         public async Task<ActionResult<List<Keeps>>> GetAll()
         {
