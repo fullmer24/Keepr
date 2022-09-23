@@ -1,4 +1,8 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using Dapper;
+using Keepr.Models;
 
 namespace Keepr.Repositories
 {
@@ -11,9 +15,35 @@ namespace Keepr.Repositories
             _db = db;
         }
 
+        internal List<Keeps> GetAll()
+        {
+            string sql = @"
+            SELECT 
+            k.*,
+            a.*
+            FROM keeps k
+            JOIN accounts a ON a.id = k.creatorId;
+            ";
+            List<Keeps> keeps = _db.Query<Keeps, Account, Keeps>(sql, (keep, account) =>
+            {
+                keep.Creator = account;
+                return keep;
+            }).ToList();
+            return keeps;
+        }
 
-
-
-
+        internal Keeps Create(Keeps newKeep)
+        {
+            string sql = @"
+            INSERT INTO keeps
+            (name, description, img, creatorId)
+            VALUES
+            (@name, @description, @img, @creatorId);
+            SELECT LAST_INSERT_ID();
+            ";
+            int id = _db.ExecuteScalar<int>(sql, newKeep);
+            newKeep.Id = id;
+            return newKeep;
+        }
     }
 }

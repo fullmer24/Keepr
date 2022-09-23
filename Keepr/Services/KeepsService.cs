@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -11,10 +13,15 @@ namespace Keepr.Services
             _keepsRepo = keepsRepo;
         }
 
+        internal List<Keeps> GetAll(string id)
+        {
+            List<Keeps> keeps = _keepsRepo.GetAll();
+            return keeps;
+        }
 
-
-
-
-
+        internal Keeps Create(Keeps newKeep)
+        {
+            return _keepsRepo.Create(newKeep);
+        }
     }
 }
