@@ -33,11 +33,18 @@ namespace Keepr.Repositories
         internal Keeps GetById(int id)
         {
             string sql = @"
-            SELECT * FROM keeps
-            WHERE id = @id;
+            SELECT
+            keeps.*,
+            a.*
+            FROM keeps 
+            JOIN accounts a ON keeps.creatorId = a.id
+            WHERE keeps.id = @id;
             ";
-            Keeps keeps = _db.Query<Keeps>(sql, new { id }).FirstOrDefault();
-            return keeps;
+            return _db.Query<Keeps, Account, Keeps>(sql, (keeps, account) =>
+            {
+                keeps.Creator = account;
+                return keeps;
+            }, new { id }).FirstOrDefault();
         }
         internal Keeps Create(Keeps newKeep)
         {
