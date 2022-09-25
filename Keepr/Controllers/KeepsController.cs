@@ -14,7 +14,6 @@ namespace Keepr.Controllers
     public class KeepsController : ControllerBase
     {
         private readonly KeepsService _keepsService;
-
         public KeepsController(KeepsService keepsService)
         {
             _keepsService = keepsService;
@@ -62,7 +61,20 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpPut("{id}")]
+        [Authorize]
+        public ActionResult<Keeps> Update(int id, [FromBody] Keeps update)
+        {
+            try
+            {
+                update.Id = id;
+                return Ok(_keepsService.Update(update));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }

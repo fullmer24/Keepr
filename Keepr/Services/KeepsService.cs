@@ -31,8 +31,13 @@ namespace Keepr.Services
             return keeps;
         }
 
-
-
-
+        internal object Update(Keeps update)
+        {
+            Keeps original = (Keeps)GetById(update.Id);
+            original.Name = update.Name ?? original.Name;
+            original.Description = update.Description ?? original.Description;
+            original.Img = update.Img ?? original.Img;
+            return _keepsRepo.Update(original);
+        }
     }
 }

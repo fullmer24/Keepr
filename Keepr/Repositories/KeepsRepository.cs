@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace Keepr.Repositories
     public class KeepsRepository
     {
         private readonly IDbConnection _db;
-
         public KeepsRepository(IDbConnection db)
         {
             _db = db;
@@ -30,7 +30,6 @@ namespace Keepr.Repositories
             }).ToList();
             return keeps;
         }
-
         internal Keeps GetById(int id)
         {
             string sql = @"
@@ -40,7 +39,6 @@ namespace Keepr.Repositories
             Keeps keeps = _db.Query<Keeps>(sql, new { id }).FirstOrDefault();
             return keeps;
         }
-
         internal Keeps Create(Keeps newKeep)
         {
             string sql = @"
@@ -53,6 +51,22 @@ namespace Keepr.Repositories
             int id = _db.ExecuteScalar<int>(sql, newKeep);
             newKeep.Id = id;
             return newKeep;
+        }
+        internal object Update(Keeps keepsData)
+        {
+            string sql = @"
+            UPDATE keeps SET
+                name = @name,
+                description = @description,
+                img = @img
+            WHERE id = @id
+            ";
+            int rowsAffected = _db.Execute(sql, keepsData);
+            if (rowsAffected == 0)
+            {
+                throw new Exception("unable to edit keep");
+            }
+            return keepsData;
         }
 
 
