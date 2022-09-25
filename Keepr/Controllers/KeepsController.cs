@@ -50,7 +50,18 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpGet("{id}")]
+        public ActionResult<Keeps> GetById(int id)
+        {
+            try
+            {
+                return Ok(_keepsService.GetById(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
 
     }

@@ -30,6 +30,17 @@ namespace Keepr.Repositories
             }).ToList();
             return keeps;
         }
+
+        internal Keeps GetById(int id)
+        {
+            string sql = @"
+            SELECT * FROM keeps
+            WHERE id = @id;
+            ";
+            Keeps keeps = _db.Query<Keeps>(sql, new { id }).FirstOrDefault();
+            return keeps;
+        }
+
         internal Keeps Create(Keeps newKeep)
         {
             string sql = @"
