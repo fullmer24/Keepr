@@ -76,7 +76,12 @@ namespace Keepr.Repositories
             return keepsData;
         }
 
-
-
+        internal void Delete(int id)
+        {
+            string sql = @"
+            DELETE FROM keeps WHERE id = @id;
+            ";
+            _db.Execute(sql, new { id });
+        }
     }
 }

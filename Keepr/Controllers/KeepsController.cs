@@ -50,11 +50,13 @@ namespace Keepr.Controllers
             }
         }
         [HttpGet("{id}")]
-        public ActionResult<Keeps> GetById(int id)
+        public async Task<ActionResult<Keeps>> GetById(int id)
         {
             try
             {
-                return Ok(_keepsService.GetById(id));
+                Account user = await HttpContext.GetUserInfoAsync<Account>();
+                Keeps keeps = (Keeps)_keepsService.GetById(id, user?.Id);
+                return Ok(keeps);
             }
             catch (Exception e)
             {
@@ -63,18 +65,36 @@ namespace Keepr.Controllers
         }
         [HttpPut("{id}")]
         [Authorize]
-        public ActionResult<Keeps> Update(int id, [FromBody] Keeps update)
+        public async Task<ActionResult<Keeps>> Update(int id, [FromBody] Keeps keepsData)
         {
             try
             {
-                update.Id = id;
-                return Ok(_keepsService.Update(update));
+                Account user = await HttpContext.GetUserInfoAsync<Account>();
+                keepsData.Id = id;
+                Keeps keeps = (Keeps)_keepsService.Update(keepsData, user);
+                return Ok(keeps);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<string>> Delete(int id)
+        {
+            try
+            {
+                Account user = await HttpContext.GetUserInfoAsync<Account>();
+                string message = _keepsService.Delete(id, user);
+                return Ok(message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
 
     }
 }
