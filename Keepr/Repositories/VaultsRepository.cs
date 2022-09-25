@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq;
 using Dapper;
 using Keepr.Models;
 
@@ -24,8 +25,21 @@ namespace Keepr.Repositories
             newVault.Id = Id;
             return newVault;
         }
-
-
-
+        internal Vaults GetById(int id)
+        {
+            string sql = @"
+            SELECT
+            v.*,
+            a.*
+            FROM vaults v 
+            JOIN accounts a ON v.creatorId = a.id
+            WHERE v.id = @id;
+            ";
+            return _db.Query<Vaults, Account, Vaults>(sql, (v, a) =>
+            {
+                v.Creator = a;
+                return v;
+            }, new { id }).FirstOrDefault();
+        }
     }
 }
