@@ -29,5 +29,20 @@ namespace Keepr.Services
             }
             return vaults;
         }
+        internal Vaults Edit(Vaults update, Account user)
+        {
+            Vaults original = GetById(update.Id, user.Id);
+            if (original.CreatorId != user.Id)
+            {
+                throw new Exception($"cannot edit {original.Name} you are not the creator");
+            }
+            original.Name = update.Name ?? original.Name;
+            original.Description = update.Description ?? original.Description;
+            original.isPrivate = update.isPrivate ?? original.isPrivate;
+            return _vaultsRepo.Edit(original);
+        }
+
+
+
     }
 }
