@@ -41,8 +41,15 @@ namespace Keepr.Services
             original.isPrivate = update.isPrivate ?? original.isPrivate;
             return _vaultsRepo.Edit(original);
         }
-
-
-
+        internal string Delete(int id, Account user)
+        {
+            Vaults original = GetById(id, user.Id);
+            if (original.CreatorId != user.Id)
+            {
+                throw new Exception($"you can't delete {original.Name}");
+            }
+            _vaultsRepo.Delete(id);
+            return $"{original.Name} was deleted";
+        }
     }
 }

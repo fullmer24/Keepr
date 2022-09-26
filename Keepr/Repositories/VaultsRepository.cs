@@ -41,7 +41,6 @@ namespace Keepr.Repositories
                 return v;
             }, new { id }).FirstOrDefault();
         }
-
         internal Vaults Edit(Vaults update)
         {
             string sql = @"
@@ -53,6 +52,13 @@ namespace Keepr.Repositories
             ";
             _db.Execute(sql, update);
             return update;
+        }
+        internal void Delete(int id)
+        {
+            string sql = @"
+            DELETE FROM vaults WHERE id = @id;
+            ";
+            _db.Execute(sql, new { id });
         }
     }
 }
