@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <router-link title="Home" class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h1>KEEPR</h1>
       </div>
@@ -15,7 +15,7 @@
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Login />
+      <Login title="Account" />
     </div>
   </nav>
 </template>
