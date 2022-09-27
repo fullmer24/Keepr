@@ -12,8 +12,8 @@
                             <img class="img-fluid" :src="keep?.img" alt="">
                         </div>
                         <div class="col-6">
-                            <span v-for="k in keep?.views" :key="k">{{keep?.views}}</span>
-                            <span v-for="k in keep?.kept" :key="k">{{keep?.kept}}</span>
+                            <span v-for="k in keep?.views" :key="k"><i class="mdi mdi-eye"></i>{{keep?.views}}</span>
+                            <span v-for="k in keep?.kept" :key="k"><i class="mdi mdi-safe"></i>{{keep?.kept}}</span>
                             <div class="text-center">
                                 <div class="pt-2">
                                     <h1 class="border-bottom ">{{keep?.name}}</h1>

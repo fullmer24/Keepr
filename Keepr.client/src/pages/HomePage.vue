@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-6 col-md-3 my-2" v-for="k in keeps" :key="k.id">
+    <div class="col-6 col-md-3 my-4" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>
   </div>

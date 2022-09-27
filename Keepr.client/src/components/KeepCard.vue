@@ -3,6 +3,7 @@
         <img class="keep-img" :src="keep.img" alt="">
         <div class="p-2">
             <h1 class="text-center border-bottom">{{keep.name}}</h1>
+            <img class="rounded creator-img" :src="keep.creator.picture" alt="">
         </div>
     </div>
     <KeepModal />
@@ -43,5 +44,10 @@ export default {
     height: 175px;
     width: 200px;
     object-fit: cover;
+}
+
+.creator-img {
+    height: 50px;
+    width: 50px;
 }
 </style>
