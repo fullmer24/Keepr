@@ -2,7 +2,7 @@
     <div class="rounded elevation-4 justify-content-center selectable" @click="setActive">
         <img class="keep-img" :src="keep.img" alt="">
         <div class="p-2">
-            <h1 class="text-center">{{keep.name}}</h1>
+            <h1 class="text-center border-bottom">{{keep.name}}</h1>
         </div>
     </div>
     <KeepModal />
@@ -24,7 +24,7 @@ export default {
             async setActive() {
                 try {
                     Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
-                    await keepsService.getOne(props.keeps.id)
+                    await keepsService.getOne(props.keep.id)
                 } catch (error) {
                     logger.error(error)
                 }
