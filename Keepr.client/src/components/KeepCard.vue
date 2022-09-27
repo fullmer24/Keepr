@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded elevation-4 d-flex justify-content-between selectable" @click="setActive">
+    <div class="rounded elevation-4 justify-content-between selectable" @click="setActive">
         <img class="keep-img" src="{{keep.img}}" alt="">
         <div class="p-2">
             <h1>{{keep.name}}</h1>
