@@ -39,7 +39,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 .keep-img {
     height: 175px;
     width: 200px;
