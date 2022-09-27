@@ -1,6 +1,6 @@
 <template>
     <div class="rounded elevation-4 justify-content-center selectable" @click="setActive">
-        <img class="keep-img" src={{keep.img}} alt="">
+        <img class="keep-img" :src="keep.img" alt="">
         <div class="p-2">
             <h1 class="text-center">{{keep.name}}</h1>
         </div>
