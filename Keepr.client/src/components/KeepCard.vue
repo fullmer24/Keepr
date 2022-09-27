@@ -1,8 +1,8 @@
 <template>
-    <div class="rounded elevation-4 justify-content-between selectable" @click="setActive">
-        <img class="keep-img" src="{{keep.img}}" alt="">
+    <div class="rounded elevation-4 justify-content-center selectable" @click="setActive">
+        <img class="keep-img" src={{keep.img}} alt="">
         <div class="p-2">
-            <h1>{{keep.name}}</h1>
+            <h1 class="text-center">{{keep.name}}</h1>
         </div>
     </div>
     <KeepModal />
@@ -40,8 +40,8 @@ export default {
 
 <style>
 .keep-img {
-    height: 200px;
-    width: 250px;
+    height: 175px;
+    width: 200px;
     object-fit: cover;
 }
 </style>
