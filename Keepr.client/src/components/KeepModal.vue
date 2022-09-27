@@ -51,13 +51,29 @@
     </div>
 </template>
 <script>
+import { keepsService } from '../services/KeepsService.js';
 import { computed } from '@vue/runtime-core';
 import { AppState } from '../AppState';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { router } from '../router.js';
 export default {
     setup() {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
+            async deleteKeep(keep) {
+                try {
+                    const yes = await Pop.confirm('Delete this keep?')
+                    if (!yes) { return }
+                    await keepsService.deleteKeep(keep.id)
+                    Pop.toast(`Keep ${keep.name} deleted`)
+                    router.push({ name: 'Home' })
+                } catch (error) {
+                    logger.error('[deleting keep]', error)
+                    Pop.error(error)
+                }
+            }
         };
     },
 };
