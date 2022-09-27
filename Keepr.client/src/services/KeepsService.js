@@ -13,7 +13,7 @@ class KeepsService {
         const res = await api.get(`api/keeps/${id}`)
         // logger.log('get one', res.data)
         AppState.activeKeep = res.data
-        logger.log('active', AppState.activeKeep)
+        // logger.log('active', AppState.activeKeep)
     }
 
 

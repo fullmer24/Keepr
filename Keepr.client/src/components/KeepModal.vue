@@ -23,6 +23,9 @@
                                 </div>
                                 <!-- NOTE add buttons and profile -->
                             </div>
+                            <div v-if="creator">
+                                <button @click="deleteKeep"><i class="mdi mdi-delete"></i></button>
+                            </div>
                         </div>
 
                     </div>
