@@ -23,7 +23,7 @@
                                 </div>
                                 <!-- NOTE add buttons and profile -->
                             </div>
-                            <div v-if="creator">
+                            <div v-if="account.id == keep?.creatorId">
                                 <button @click="deleteKeep"><i class="mdi mdi-delete"></i></button>
                             </div>
                         </div>
@@ -46,7 +46,8 @@ import { AppState } from '../AppState';
 export default {
     setup() {
         return {
-            keep: computed(() => AppState.activeKeep)
+            keep: computed(() => AppState.activeKeep),
+            account: computed(() => AppState.account),
         };
     },
 };
