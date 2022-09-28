@@ -56,8 +56,28 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 img {
   max-width: 250px;
+}
+
+.account {
+  display: grid;
+  height: 80vh;
+  place-content: center;
+  text-align: center;
+  user-select: none;
+
+  .account-card {
+    width: 50vw;
+
+    >img {
+      height: 200px;
+      max-width: 200px;
+      width: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
 }
 </style>
