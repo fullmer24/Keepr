@@ -59,26 +59,26 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
-    props: {
-        keep: { type: Object, required: true }
-    },
+    // props: {
+    //     keep: { type: Object, required: true }
+    // },
     setup(props) {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
             // FIXME fix delete
-            async deleteKeep() {
-                try {
-                    const yes = await Pop.confirm('Delete this keep?')
-                    if (!yes) { return }
-                    await keepsService.deleteKeep(props.keep.id)
-                    Pop.toast(`Keep ${keep.name} deleted`)
-                    router.push({ name: 'Home' })
-                } catch (error) {
-                    logger.error('[deleting keep]', error)
-                    Pop.error(error)
-                }
-            }
+            // async deleteKeep() {
+            //     try {
+            //         const yes = await Pop.confirm('Delete this keep?')
+            //         if (!yes) { return }
+            //         await keepsService.deleteKeep(props.keep.id)
+            //         Pop.toast(`Keep ${keep.name} deleted`)
+            //         router.push({ name: 'Home' })
+            //     } catch (error) {
+            //         logger.error('[deleting keep]', error)
+            //         Pop.error(error)
+            //     }
+            // }
         };
     },
 };
