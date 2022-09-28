@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -16,7 +18,14 @@ namespace Keepr.Services
         {
             return _vaultKeepsRepo.Create(newVaultKeep);
         }
-
-
+        internal List<VaultKeeps> GetKeepByVaultId(int id)
+        {
+            List<VaultKeeps> vaultKeeps = _vaultKeepsRepo.GetKeepsByVaultId(id);
+            if (vaultKeeps == null)
+            {
+                throw new Exception("nothing at that id");
+            }
+            return vaultKeeps;
+        }
     }
 }
