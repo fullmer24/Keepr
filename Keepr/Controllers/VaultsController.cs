@@ -13,11 +13,12 @@ namespace Keepr.Controllers
     public class VaultsController : ControllerBase
     {
         private readonly VaultsService _vaultsService;
-        private readonly VaultKeepsService _vaultKeepsService;
-        public VaultsController(VaultsService vaultsService, VaultKeepsService vaultKeepsService)
+        // private readonly VaultKeepsService _vaultKeepsService;
+        public VaultsController(VaultsService vaultsService)
+        // NOTE put in () above (, VaultKeepsService vaultKeepsService)
         {
             _vaultsService = vaultsService;
-            _vaultKeepsService = vaultKeepsService;
+            // _vaultKeepsService = vaultKeepsService;
         }
         [HttpPost]
         [Authorize]

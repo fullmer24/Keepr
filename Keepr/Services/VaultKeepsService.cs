@@ -1,3 +1,4 @@
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace Keepr.Services
@@ -10,6 +11,10 @@ namespace Keepr.Services
         {
             _vaultKeepsRepo = vaultKeepsRepo;
             _vaultsService = vaultsService;
+        }
+        internal VaultKeeps Create(VaultKeeps newVaultKeep)
+        {
+            return _vaultKeepsRepo.Create(newVaultKeep);
         }
 
 

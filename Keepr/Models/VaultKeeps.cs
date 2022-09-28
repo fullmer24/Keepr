@@ -5,5 +5,6 @@ namespace Keepr.Models
         public string CreatorId { get; set; }
         public int vaultId { get; set; }
         public int keepId { get; set; }
+        public Account Creator { get; set; }
     }
 }
