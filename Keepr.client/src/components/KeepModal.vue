@@ -33,7 +33,7 @@
                                 <!-- FIXME fix delete -->
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
-                                    <button @click="deleteKeep"><i class="mdi mdi-delete p-s"></i></button>
+                                    <button @click="deleteKeep(props)"><i class="mdi mdi-delete p-s"></i></button>
                                 </div>
                                 <div title="view profile" class="col-2 p-2 ms-3 ms-md-5">
                                     <!-- NOTE finish profile link -->
@@ -73,7 +73,7 @@ export default {
             //     try {
             //         const yes = await Pop.confirm('Delete this keep?')
             //         if (!yes) { return }
-            //         await keepsService.deleteKeep(props.keep.id)
+            //         await keepsService.deleteKeep(props.id)
             //         Pop.toast(`Keep ${keep.name} deleted`)
             //         router.push({ name: 'Home' })
             //     } catch (error) {
