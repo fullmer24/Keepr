@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-color px-3">
     <router-link title="Home" class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1>KEEPR</h1>
+        <h1 class="keepr-text">K</h1>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -15,7 +15,7 @@
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
-      <Login title="Account" />
+      <Login class="bg-login" title="Account" />
     </div>
   </nav>
 </template>
@@ -41,5 +41,18 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.bg-color {
+  background-color: aquamarine;
+}
+
+.bg-login {
+  background-color: rgb(56, 56, 56);
+}
+
+.keepr-text {
+  color: rgb(56, 56, 56);
+  border-color: rgb(56, 56, 56);
 }
 </style>

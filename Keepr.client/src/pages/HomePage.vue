@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row m-3">
     <div class="col-6 col-md-3 my-4" v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>

@@ -1,8 +1,11 @@
 <template>
-    <div class="rounded elevation-4 justify-content-center selectable" @click="setActive">
+    <div class="row rounded elevation-4 justify-content-center selectable" @click="setActive">
         <img class="keep-img" :src="keep.img" alt="">
-        <div class="p-2">
-            <h1 class="text-center border-bottom">{{keep.name}}</h1>
+        <div class="p-2 col-8">
+            <h5 class="border-bottom mt-2 offset-1">{{keep.name}}</h5>
+        </div>
+        <div class="p-2 col-4">
+            <!-- NOTE make img background -->
             <img class="rounded creator-img" :src="keep.creator.picture" alt="">
         </div>
     </div>
@@ -47,7 +50,7 @@ export default {
 }
 
 .creator-img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
 }
 </style>
