@@ -9,10 +9,11 @@ class KeepsService {
         AppState.keeps = res.data
         // logger.log('appstate', AppState.keeps)
     }
-    async getOne(id) {
+    async getById(id) {
         const res = await api.get(`api/keeps/${id}`)
         // logger.log('get one', res.data)
         AppState.activeKeep = res.data
+        // AppState.activeKeep++
         // logger.log('active', AppState.activeKeep)
     }
     async deleteKeep(id) {
