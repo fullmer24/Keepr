@@ -28,7 +28,7 @@
                                 <div title="add to vault" class="col-3 p-2 ms-md-4">
                                     <button>ADD TO VAULT</button>
                                 </div>
-                                <!-- NOTE fix delete -->
+                                <!-- FIXME fix delete -->
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
                                     <button @click="deleteKeep"><i class="mdi mdi-delete p-s"></i></button>
@@ -66,6 +66,7 @@ export default {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
+            // FIXME fix delete
             async deleteKeep() {
                 try {
                     const yes = await Pop.confirm('Delete this keep?')
