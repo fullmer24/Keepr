@@ -18,9 +18,9 @@ namespace Keepr.Services
         {
             return _vaultKeepsRepo.Create(newVaultKeep);
         }
-        internal List<VaultKeeps> GetKeepByVaultId(int id, string userId)
+        internal List<VaultKeepsVM> GetKeepByVaultId(int id, string userId)
         {
-            List<VaultKeeps> vaultKeeps = _vaultKeepsRepo.GetKeepsByVaultId(id);
+            List<VaultKeepsVM> vaultKeeps = _vaultKeepsRepo.GetKeepsByVaultId(id);
             if (vaultKeeps == null)
             {
                 throw new Exception("nothing at that id");
