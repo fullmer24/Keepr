@@ -69,6 +69,7 @@ export default {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
             // FIXME fix delete
+            // NOTE references(instacult, art establishment, gregslist vue)
             // async deleteKeep() {
             //     try {
             //         const yes = await Pop.confirm('Delete this keep?')
