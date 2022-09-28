@@ -13,9 +13,11 @@ namespace Keepr.Controllers
     public class VaultsController : ControllerBase
     {
         private readonly VaultsService _vaultsService;
-        public VaultsController(VaultsService vaultsService)
+        private readonly VaultKeepsService _vaultKeepsService;
+        public VaultsController(VaultsService vaultsService, VaultKeepsService vaultKeepsService)
         {
             _vaultsService = vaultsService;
+            _vaultKeepsService = vaultKeepsService;
         }
         [HttpPost]
         [Authorize]
@@ -79,5 +81,7 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+
     }
 }
