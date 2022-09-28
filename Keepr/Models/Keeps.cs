@@ -12,4 +12,8 @@ namespace Keepr.Models
         public Account Creator { get; set; }
         // NOTE possibly replicate line above for vaultKeepId
     }
+    public class VaultKeepsVM : Keeps
+    {
+        public int MyVaultKeepsId { get; set; }
+    }
 }

@@ -32,13 +32,11 @@ namespace Keepr.Repositories
         {
             string sql = @"
             SELECT
-            vKeep.*,
-            v.*,
-            k.*
-            FROM vaultKeep vKeep
-            JOIN vaults v ON vKeep.vaultId = v.id 
-            JOIN keeps k ON vKeep.id = k.vaultKeepId
-            WHERE vKeep.vaultId = @id;
+            vKeeps.*
+            v.id
+            FROM vaultKeeps vKeeps
+            JOIN vaults v ON v.id = vKeeps.vaultId
+            WHERE vKeeps.vaultId = @id;
             ";
             List<VaultKeeps> vaultKeeps = _db.Query<VaultKeeps, Vaults, VaultKeeps>(sql, (vaultKeep, vault) =>
             {
@@ -49,6 +47,3 @@ namespace Keepr.Repositories
         }
     }
 }
-
-
-
