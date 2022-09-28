@@ -22,6 +22,7 @@ namespace Keepr.Repositories
             SELECT LAST_INSERT_ID();
             ";
             int id = _db.ExecuteScalar<int>(sql, newVaultKeep);
+            newVaultKeep.Id = id;
             return newVaultKeep;
         }
     }
