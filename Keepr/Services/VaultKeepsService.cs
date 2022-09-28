@@ -9,6 +9,7 @@ namespace Keepr.Services
     {
         private readonly VaultKeepsRepository _vaultKeepsRepo;
         private readonly VaultsService _vaultsService;
+
         public VaultKeepsService(VaultKeepsRepository vaultKeepsRepo, VaultsService vaultsService)
         {
             _vaultKeepsRepo = vaultKeepsRepo;
@@ -26,6 +27,22 @@ namespace Keepr.Services
                 throw new Exception("nothing at that id");
             }
             return vaultKeeps;
+        }
+
+        internal string Delete(int id, Account userInfo)
+        {
+            VaultKeeps vaultKeeps = _vaultKeepsRepo.GetOne(id);
+            if (vaultKeeps == null)
+            {
+                throw new Exception("no vaultKeep by that id");
+            }
+            Vaults vaults = _vaultsService.GetById(vaultKeeps.vaultId);
+            if (vaults.CreatorId != userInfo.Id)
+            {
+                throw new Exception($"You can't do that {userInfo.Name}");
+            }
+            _vaultKeepsRepo.Delete(id);
+            return $"{vaultKeeps.Id} Deleted";
         }
     }
 }

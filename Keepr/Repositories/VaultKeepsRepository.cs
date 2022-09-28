@@ -32,23 +32,34 @@ namespace Keepr.Repositories
         {
             string sql = @"
             SELECT
-            vKeeps.*
-            v.id,
-            k.*
+            vKeeps.*,
+            k.*,
             a.*
-            FROM vaultKeeps vKeeps
-            JOIN vaults v ON v.id = vKeeps.vaultId
-            JOIN keeps k ON k.vaultId = v.id
-            JOIN accounts a ON v.creatorId = a.id
+            FROM vaultKeep vKeeps
+            JOIN keeps k ON vKeeps.keepId = k.id
+            JOIN accounts a ON k.creatorId = a.id
             WHERE vKeeps.vaultId = @id;
             ";
-            List<VaultKeepsVM> vaultKeeps = _db.Query<VaultKeeps, VaultKeepsVM, Keeps, Account, VaultKeeps>(sql, (vKeeps, v, k, a) =>
+            List<VaultKeepsVM> vaultKeeps = _db.Query<VaultKeeps, VaultKeepsVM, Account, VaultKeepsVM>(sql, (vKeeps, k, a) =>
             {
-                v.Creator = a;
+                k.Creator = a;
                 k.VaultKeepId = vKeeps.Id;
-                return v;
+                return k;
             }, new { id }).ToList();
             return vaultKeeps;
+        }
+
+        internal VaultKeeps GetOne(int id)
+        {
+            string sql = @"
+            SELECT * FROM vaultKeep WHERE id = @id";
+            return _db.Query<VaultKeeps>(sql, new { id }).FirstOrDefault();
+        }
+
+        internal void Delete(int id)
+        {
+            string sql = @"DELETE FROM vaultKeep  WHERE id = @id;";
+            _db.Execute(sql, new { id });
         }
     }
 }

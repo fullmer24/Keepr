@@ -41,6 +41,17 @@ namespace Keepr.Services
             original.isPrivate = update.isPrivate ?? original.isPrivate;
             return _vaultsRepo.Edit(original);
         }
+
+        internal Vaults GetById(int vaultId)
+        {
+            Vaults vaults = _vaultsRepo.GetById(vaultId);
+            if (vaults == null)
+            {
+                throw new Exception("no vault at that id");
+            }
+            return vaults;
+        }
+
         internal string Delete(int id, Account user)
         {
             Vaults original = GetById(id, user.Id);
