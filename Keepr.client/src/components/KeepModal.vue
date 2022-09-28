@@ -25,8 +25,10 @@
                             </div>
                             <div class="row">
                                 <!-- NOTE do vault here -->
-                                <div title="add to vault" class="col-3 p-2 ms-md-4">
-                                    <button>ADD TO VAULT</button>
+                                <div title="add to vault" class="col-4 p-2 ms-md-4">
+                                    <button class="bg-white vaultTab">
+                                        <p>ADD TO VAULT</p>
+                                    </button>
                                 </div>
                                 <!-- FIXME fix delete -->
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
@@ -87,5 +89,10 @@ export default {
 .creator-img {
     height: 35px;
     width: 35px;
+}
+
+.vaultTab {
+    color: aquamarine;
+    border-color: aquamarine;
 }
 </style>
