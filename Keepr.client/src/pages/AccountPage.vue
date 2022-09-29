@@ -9,6 +9,7 @@
     </div>
   </div>
   <!-- NOTE vaults -->
+  <!-- Add modal, and form-->
   <div class="row p-2">
     <h1 class="p-2">Vaults<button class="mdi mdi-plus p-2 ms-4"></button></h1>
   </div>
@@ -23,6 +24,7 @@
   </div>
   <!-- NOTE keeps -->
   <div class="row p-2">
+    <!-- NOTE add modal and form -->
     <h1 class="p-2">Keeps<button class="mdi mdi-plus p-2 ms-4"></button></h1>
     <div class="row">
       <!-- FIXME keeps not rendering and v-if not working-->
