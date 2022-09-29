@@ -7,6 +7,16 @@ CREATE TABLE IF NOT EXISTS accounts(
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8 COMMENT '';
 
+-- NOTE Profile
+CREATE TABLE IF NOT EXISTS profile(
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  picture TEXT NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  accountId VARCHAR(255) NOT NULL,
+  FOREIGN KEY (accountId) REFERENCES accounts(id)
+)default charset utf8 COMMENT '';
+
 -- NOTE keeps
 CREATE TABLE IF NOT EXISTS keeps(
   id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
