@@ -6,19 +6,20 @@ namespace Keepr.Services
 {
     public class ProfilesService
     {
-        private readonly ProfilesRepository _profileRepo;
-        public ProfilesService(ProfilesRepository profileRepo)
+        private readonly AccountsRepository _repo;
+
+        public ProfilesService(AccountsRepository repo)
         {
-            _profileRepo = profileRepo;
+            _repo = repo;
         }
-        internal Profile GetById(int id, string userId)
+        internal Account GetById(string id)
         {
-            Profile profile = _profileRepo.GetById(id);
-            if (profile == null)
+            Account account = _repo.GetById(id);
+            if (account == null)
             {
                 throw new Exception("No profile at that id");
             }
-            return profile;
+            return account;
         }
     }
 }

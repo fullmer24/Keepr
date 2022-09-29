@@ -17,13 +17,13 @@ namespace Keepr.Controllers
             _profilesService = profilesService;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Profile>> GetById(int id)
+        public async Task<ActionResult<Account>> GetById(string id)
         {
             try
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
-                Profile profile = _profilesService.GetById(id, user?.Id);
-                return Ok(profile);
+                Account account = _profilesService.GetById(id);
+                return Ok(account);
             }
             catch (Exception e)
             {
