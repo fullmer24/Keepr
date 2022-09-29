@@ -34,13 +34,15 @@ namespace Keepr
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
             services.AddScoped<AccountsRepository>();
-            services.AddScoped<AccountService>();
             services.AddTransient<KeepsRepository>();
             services.AddTransient<VaultsRepository>();
             services.AddTransient<VaultKeepsRepository>();
+            services.AddTransient<ProfilesRepository>();
+            services.AddScoped<AccountService>();
             services.AddTransient<KeepsService>();
             services.AddTransient<VaultsService>();
             services.AddTransient<VaultKeepsService>();
+            services.AddTransient<ProfilesService>();
         }
 
         private void ConfigureCors(IServiceCollection services)
