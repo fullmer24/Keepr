@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS accounts(
 ) default charset utf8 COMMENT '';
 
 -- NOTE Profile
-CREATE TABLE IF NOT EXISTS profile(
-  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  picture TEXT NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  accountId VARCHAR(255) NOT NULL,
-  FOREIGN KEY (accountId) REFERENCES accounts(id)
-)default charset utf8 COMMENT '';
+-- CREATE TABLE IF NOT EXISTS profile(
+--   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+--   name VARCHAR(255) NOT NULL,
+--   picture TEXT NOT NULL,
+--   email VARCHAR(255) NOT NULL,
+--   accountId VARCHAR(255) NOT NULL,
+--   FOREIGN KEY (accountId) REFERENCES accounts(id)
+-- )default charset utf8 COMMENT '';
 
 -- NOTE keeps
 CREATE TABLE IF NOT EXISTS keeps(
@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS keeps(
   img TEXT NOT NULL,
   views INT DEFAULT 0,
   kept INT DEFAULT 0,
-  vaultKeepId INT,
   FOREIGN KEY (creatorId) REFERENCES accounts (id)
 )default charset utf8 COMMENT '';
 
@@ -50,3 +49,10 @@ CREATE TABLE IF NOT EXISTS vaultKeep(
   FOREIGN KEY (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
   FOREIGN KEY (keepId) REFERENCES keeps (id) ON DELETE CASCADE
 )default charset utf8 COMMENT '';
+
+
+
+
+DROP Table vaultKeep;
+DROP Table vaults;
+DROP Table keeps;
