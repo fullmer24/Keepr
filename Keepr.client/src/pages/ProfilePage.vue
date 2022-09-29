@@ -80,14 +80,14 @@ img {
     max-width: 250px;
 }
 
-.account {
+.profile {
     display: grid;
     height: 80vh;
     place-content: center;
     text-align: center;
     user-select: none;
 
-    .account-card {
+    .profile-card {
         width: 50vw;
 
         >img {
