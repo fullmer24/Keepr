@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -61,6 +62,11 @@ namespace Keepr.Services
             }
             _vaultsRepo.Delete(id);
             return $"{original.Name} was deleted";
+        }
+
+        internal List<Vaults> getVaultsByProfileId(string id)
+        {
+            return _vaultsRepo.getVaultsByProfileId(id);
         }
     }
 }
