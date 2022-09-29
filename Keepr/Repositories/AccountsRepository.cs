@@ -1,6 +1,8 @@
 using System.Data;
 using Keepr.Models;
 using Dapper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Keepr.Repositories
 {
@@ -34,6 +36,23 @@ namespace Keepr.Repositories
               (@Name, @Picture, @Email, @Id)";
             _db.Execute(sql, newAccount);
             return newAccount;
+        }
+
+        internal List<Keeps> GetKeepsByProfile(int id)
+        {
+            string sql = @"
+            SELECT 
+            keeps.*,
+            a.*
+            FROM keeps
+            JOIN accounts a ON keeps.creatorId = a.id
+            WHERE keeps.creatorId = @id
+            ";
+            return _db.Query<Keeps, Account, Keeps>(sql, (keeps, profile) =>
+            {
+                keeps.Creator = profile;
+                return keeps;
+            }, new { id }).ToList();
         }
 
         internal Account Edit(Account update)
