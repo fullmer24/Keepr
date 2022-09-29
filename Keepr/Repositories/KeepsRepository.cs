@@ -86,7 +86,11 @@ namespace Keepr.Repositories
             JOIN accounts a ON k.creatorId = a.id
             WHERE a.id = @id;
             ";
-            return _db.Query<Keeps>(sql, new { id }).ToList();
+            return _db.Query<Keeps, Account, Keeps>(sql, (k, profile) =>
+            {
+                k.Creator = profile;
+                return k;
+            }, new { id }).ToList();
         }
 
         internal void Delete(int id)
