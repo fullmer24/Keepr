@@ -25,7 +25,7 @@
                             </div>
                             <div class="row">
                                 <!-- NOTE do vault here -->
-                                <div title="add to vault" class="col-4 p-2 ms-md-4">
+                                <div v-if="user.isAuthenticated" title="add to vault" class="col-4 p-2 ms-md-4">
                                     <button class="bg-white vaultTab">
                                         <p>ADD TO VAULT</p>
                                     </button>
@@ -68,6 +68,7 @@ export default {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
+            user: computed(() => AppState.user)
             // FIXME fix delete
             // NOTE references(instacult, art establishment, gregslist vue)
             // async deleteKeep() {

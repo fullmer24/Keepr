@@ -12,16 +12,22 @@
   <div class="row p-2">
     <h1 class="p-2">Vaults<button class="mdi mdi-plus p-2 ms-4"></button></h1>
   </div>
+  <div class="row">
+    <!-- FIXME vaults not getting accessed -->
+    <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
+      <VaultCard :vault="v" />
+    </div>
+
+  </div>
   <!-- NOTE keeps -->
   <div class="row p-2">
     <h1 class="p-2">Keeps<button class="mdi mdi-plus p-2 ms-4"></button></h1>
     <div class="row">
-      <!-- FIXME keeps not rendering -->
+      <!-- FIXME keeps not rendering and v-if not working-->
       <div class="col-6 col-md-3 my-4 p-4" v-for="k in keeps" :key="k.id">
-        <!-- <div v-if="account.id == keep?.creatorId"> -->
-        <KeepCard :keep="k" />
-        {{keep}}
-        <!-- </div> -->
+        <div v-if="account.id == keep?.creatorId">
+          <KeepCard :keep="k" />
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +38,9 @@ import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import KeepCard from '../components/KeepCard.vue';
 import { keepsService } from '../services/KeepsService.js';
+import { vaultsService } from '../services/VaultsService.js';
 import { logger } from '../utils/Logger.js';
+import VaultCard from '../components/VaultCard.vue';
 export default {
   name: "Account",
   setup() {
@@ -41,18 +49,27 @@ export default {
         await keepsService.getKeeps();
       }
       catch (error) {
-        logger.log(error);
+        logger.error(error.message);
+      }
+    }
+    async function getVaults() {
+      try {
+        await vaultsService.getVaults()
+      } catch (error) {
+        logger.error(error.message)
       }
     }
     onMounted(() => {
       getKeeps();
+      getVaults();
     });
     return {
       keep: computed(() => AppState.keeps),
+      vault: computed(() => AppState.vaults),
       account: computed(() => AppState.account)
     };
   },
-  components: { KeepCard }
+  components: { KeepCard, VaultCard }
 }
 </script>
 

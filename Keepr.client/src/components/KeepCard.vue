@@ -5,7 +5,7 @@
             <h3 class="border-bottom mt-2 offset-1">{{keep.name}}</h3>
         </div>
         <div class="p-2 col-6 col-md-3">
-            <!-- NOTE make img background -->
+            <!-- FIXME make img background -->
             <img class="rounded creator-img mt-3 mt-md-1" :src="keep.creator.picture" alt="">
         </div>
     </div>
