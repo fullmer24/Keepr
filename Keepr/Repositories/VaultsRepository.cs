@@ -66,7 +66,12 @@ namespace Keepr.Repositories
         {
             // TODO this will need a JOIN for the CREATOR
             string sql = @"
-            SELECT * FROM vaults WHERE creatorId = @id;
+            SELECT 
+            v.*,
+            a.*
+            FROM vaults v 
+            JOIN accounts a ON v.creatorId = a.id
+            WHERE a.id = @id;
             ";
             return _db.Query<Vaults>(sql, new { id }).ToList();
         }

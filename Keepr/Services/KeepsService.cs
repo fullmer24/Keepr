@@ -56,5 +56,10 @@ namespace Keepr.Services
             _keepsRepo.Delete(id);
             return $"{original.Name} was deleted";
         }
+
+        internal List<Keeps> getKeepsByProfileId(string id)
+        {
+            return _keepsRepo.GetKeepsByProfileId(id);
+        }
     }
 }
