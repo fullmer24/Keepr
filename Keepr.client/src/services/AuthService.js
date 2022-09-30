@@ -4,6 +4,7 @@ import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
+import { keepsService } from './KeepsService.js'
 import { socketService } from './SocketService'
 import { vaultsService } from './VaultsService.js'
 
@@ -31,6 +32,8 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function () {
 
   // This getting my vaults which is in my account
   await vaultsService.getAccountVaults()
+  await keepsService.getAccountKeeps();
+
 
 })
 

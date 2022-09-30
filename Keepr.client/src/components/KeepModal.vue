@@ -27,9 +27,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <!-- NOTE do vault here -->
+                                <!-- NOTE use for Vault selection -->
+                                <!-- <router-link v-if="keep" :to="{name: 'Vault Page', params: {id:keep?.id}}">
+                                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">See Details</button>
+                                    </router-link> -->
                                 <div v-if="user.isAuthenticated" title="add to vault" class="col-4 p-2 ms-md-4">
                                     <div class="dropdown">
+
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Add to Vault
@@ -47,17 +51,17 @@
                                 </div>
                                 <div title="view profile" class="col-2 p-2 ms-3 ms-md-5">
                                     <!-- NOTE finish profile link -->
+                                    <!-- <router-link :to="{ name: 'Profile', params:{id:profiles?.id} }"> -->
+                                    <!-- <div title="Profile" class="list-group-item list-group-item-action hoverable"> -->
                                     <img class="selectable creator-img p-s" :src="keep?.creator.picture" alt="">
+                                    <!-- </div> -->
+                                    <!-- </router-link> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <!-- NOTE use for Vault selection -->
-                    <!-- <router-link v-if="keep" :to="{name: 'Vault Page', params: {id:keep?.id}}">
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">See Details</button>
-                    </router-link> -->
                 </div>
             </div>
         </div>
@@ -74,17 +78,6 @@ import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
     setup() {
-        // async function getVaultsByAccountId() {
-        //     try {
-        //         await vaultsService.getVaultsByAccountId()
-        //     } catch (error) {
-        //         logger.error(error.message)
-        //     }
-        // }
-
-        // onMounted(() => {
-        //     getVaultsByAccountId();
-        // });
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
@@ -97,7 +90,7 @@ export default {
                     await keepsService.deleteKeep(id)
                     Pop.toast(`Keep deleted`)
                     router.push({ name: 'Home' })
-                    // Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
+
                 } catch (error) {
                     logger.error('Delete Error', error)
                     Pop.error(error.message)

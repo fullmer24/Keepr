@@ -50,7 +50,7 @@ export default {
     setup() {
         async function getKeeps() {
             try {
-                await keepsService.getKeeps();
+                await keepsService.getKeepsByProfileId(id);
             }
             catch (error) {
                 logger.error(error.message);
@@ -59,7 +59,7 @@ export default {
         // This is going in the service and going to profiles with profile id
         async function getVaults() {
             try {
-                await vaultsService.getVaultsByProfileId()
+                await vaultsService.getVaultsByProfileId(id)
             } catch (error) {
                 logger.error(error.message)
             }
@@ -69,7 +69,7 @@ export default {
             getVaults();
         });
         return {
-            keeps: computed(() => AppState.keeps),
+            keeps: computed(() => AppState.profileKeeps),
             vaults: computed(() => AppState.vaults),
             account: computed(() => AppState.account),
         };

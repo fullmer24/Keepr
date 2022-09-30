@@ -12,18 +12,18 @@ class VaultsService {
 
     async getAccountVaults() {
         const res = await api.get('account/vaults')
-        logger.log(res.data, 'getting vaults for profile')
+        // logger.log(res.data, 'getting vaults for profile')
 
         AppState.myVaults = res.data
-        logger.log('account vaults', AppState.myVaults)
+        // logger.log('account vaults', AppState.myVaults)
     }
 
     // get vaults by profile
-    async getVaultsByProfileId() {
+    async getVaultsByProfileId(id) {
         const res = await api.get(`api/profile/${id}/vaults`)
-        logger.log(res.data, 'getting vaults for profile')
+        // logger.log(res.data, 'getting vaults for profile')
         AppState.vaults = res.data
-        logger.log('appstate', AppState.vaults)
+        // logger.log('appstate', AppState.vaults)
     }
 
 

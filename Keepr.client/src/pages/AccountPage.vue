@@ -50,7 +50,7 @@ export default {
   setup() {
     async function getKeeps() {
       try {
-        await keepsService.getKeeps();
+        await keepsService.getAccountKeeps(id);
       }
       catch (error) {
         logger.error(error.message);
@@ -63,12 +63,12 @@ export default {
     //     logger.error(error.message)
     //   }
     // }
-    onMounted(() => {
-      getKeeps();
-      // getVaults();
-    });
+    // onMounted(() => {
+    //   getKeeps();
+    // getVaults();
+    // });
     return {
-      keeps: computed(() => AppState.keeps),
+      keeps: computed(() => AppState.myKeeps),
       vaults: computed(() => AppState.myVaults),
       account: computed(() => AppState.account),
     };
