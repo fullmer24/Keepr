@@ -47,16 +47,13 @@
                                 </div>
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
-                                    <button @click="deleteKeep(keep.id)"><i class="mdi mdi-delete p-s"></i></button>
+                                    <button @click="deleteKeep(keep.id)" data-bs-dismiss="modal"><i
+                                            class="mdi mdi-delete p-s"></i></button>
                                 </div>
                                 <div title="view profile" class="col-2 p-2 ms-3 ms-md-5">
                                     <!-- NOTE finish profile link -->
-                                    <!-- <router-link :to="{ name: 'Profile', params:{id:profiles?.id} }"> -->
-                                    <!-- <div title="Profile" class="list-group-item list-group-item-action hoverable"> -->
-                                    <img @click="goToProfile(id)" class="selectable creator-img p-s"
-                                        :src="keep?.creator.picture" alt="">
-                                    <!-- </div> -->
-                                    <!-- </router-link> -->
+                                    <img @click="goToProfile(keep?.creator?.id)" class="selectable creator-img p-s"
+                                        :src="keep?.creator.picture" data-bs-dismiss="modal" alt="">
                                 </div>
                             </div>
                         </div>

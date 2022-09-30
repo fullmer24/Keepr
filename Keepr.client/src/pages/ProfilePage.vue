@@ -1,9 +1,8 @@
 <template>
-    <!-- NOTE  account info-->
     <div class="row p-4 m-2">
-        <img class="col-4 img" :src="account.picture" alt="">
+        <img class="col-4 img" :src="profiles.picture" alt="">
         <div class="col-7 ms-3">
-            <h1 class="p-2 mt-4"><b>{{account.name}}</b></h1>
+            <h1 class="p-2 mt-4"><b>{{profiles.name}}</b></h1>
             <h3>Vaults: </h3>
             <h3>Keeps: </h3>
         </div>
@@ -16,7 +15,7 @@
     <div class="row">
         <!-- FIXME vaults not getting accessed -->
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
-            <div v-if="account.id == v?.creatorId">
+            <div v-if="profiles.id == v?.creatorId">
                 <VaultCard :vault="v" />
             </div>
         </div>

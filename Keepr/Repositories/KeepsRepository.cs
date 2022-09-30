@@ -66,7 +66,8 @@ namespace Keepr.Repositories
                 name = @name,
                 description = @description,
                 img = @img,
-                views = @views
+                views = @views,
+                kept = @kept
             WHERE id = @id
             ";
             int rowsAffected = _db.Execute(sql, keepsData);
