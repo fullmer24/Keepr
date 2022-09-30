@@ -104,6 +104,7 @@ export default {
                 }
             },
             async goToProfile(id) {
+                // REVIEW syntax for router push
                 router.push(`profiles/${id}`)
             }
         };

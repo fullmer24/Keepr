@@ -1,9 +1,8 @@
 <template>
-    <!-- NOTE  account info-->
     <div class="row p-4 m-2">
-        <img class="col-4 img" :src="profiles.picture" alt="">
+        <img class="col-4 img" :src="profile.picture" alt="">
         <div class="col-7 ms-3">
-            <h1 class="p-2 mt-4"><b>{{profiles.name}}</b></h1>
+            <h1 class="p-2 mt-4"><b>{{profile.name}}</b></h1>
             <h3>Vaults: </h3>
             <h3>Keeps: </h3>
         </div>
@@ -14,7 +13,6 @@
         <h1 class="p-2">Vaults<button class="mdi mdi-plus p-2 ms-4"></button></h1>
     </div>
     <div class="row">
-        <!-- FIXME vaults not getting accessed -->
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
             <div v-if="account.id == v?.creatorId">
                 <VaultCard :vault="v" />
@@ -43,35 +41,48 @@ import { AppState } from '../AppState'
 import KeepCard from '../components/KeepCard.vue';
 import { keepsService } from '../services/KeepsService.js';
 import { vaultsService } from '../services/VaultsService.js';
+import { profilesService } from '../services/ProfilesService.js';
 import { logger } from '../utils/Logger.js';
 import VaultCard from '../components/VaultCard.vue';
+import { useRoute } from 'vue-router';
 export default {
-    name: "Account",
+
     setup() {
+        const route = useRoute()
         async function getKeeps() {
             try {
-                await keepsService.getKeepsByProfileId(id);
+                await keepsService.getKeepsByProfileId(route.params.id);
             }
             catch (error) {
                 logger.error(error.message);
             }
         }
-        // This is going in the service and going to profiles with profile id
         async function getVaults() {
             try {
-                await vaultsService.getVaultsByProfileId(id)
+                await vaultsService.getVaultsByProfileId(route.params.id)
             } catch (error) {
                 logger.error(error.message)
             }
         }
+        async function getProfile() {
+            try {
+                await profilesService.getProfile(route.params.id)
+            } catch (error) {
+                logger.error(error)
+            }
+        }
+
         onMounted(() => {
             getKeeps();
             getVaults();
+            getProfile();
+            // TODO get the profile... you'll need to write this fn... check your postman for the endpoint
         });
         return {
             keeps: computed(() => AppState.profileKeeps),
             vaults: computed(() => AppState.vaults),
             account: computed(() => AppState.account),
+            profile: computed(() => AppState.profile)
         };
     },
     components: { KeepCard, VaultCard }

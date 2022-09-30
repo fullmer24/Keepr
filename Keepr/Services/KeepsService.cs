@@ -35,8 +35,8 @@ namespace Keepr.Services
 
         internal object Update(Keeps update, Account user)
         {
-            Keeps original = (Keeps)GetById(update.Id, user.Id);
-            if (original.creatorId != user.Id)
+            Keeps original = (Keeps)GetById(update.Id, user?.Id);
+            if (original.creatorId != user?.Id)
             {
                 throw new Exception($"cannot update {original.Name} you are not the creator");
             }
@@ -48,8 +48,8 @@ namespace Keepr.Services
 
         internal string Delete(int id, Account user)
         {
-            Keeps original = (Keeps)GetById(id, user.Id);
-            if (original.creatorId != user.Id)
+            Keeps original = (Keeps)GetById(id, user?.Id);
+            if (original.creatorId != user?.Id)
             {
                 throw new Exception($"cannot delete {original.Name}, not yours");
             }

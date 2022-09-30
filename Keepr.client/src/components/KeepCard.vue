@@ -1,5 +1,5 @@
 <template>
-    <div class="position-relative rounded elevation-4 justify-content-center selectable" @click="setActive">
+    <div class="position-relative rounded elevation-4  selectable" @click="setActive">
         <img class="keep-img" :src="keep.img" alt="">
         <div class="position-absolute left-0 bottom-0 d-flex justify-content-between w-100">
             <div class="p-2 col-6 col-md-9">
@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .keep-img {
-    width: 100px;
+    width: 100%;
     object-fit: cover;
 }
 

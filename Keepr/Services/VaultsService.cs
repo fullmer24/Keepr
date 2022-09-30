@@ -32,8 +32,8 @@ namespace Keepr.Services
         }
         internal Vaults Edit(Vaults update, Account user)
         {
-            Vaults original = GetById(update.Id, user.Id);
-            if (original.CreatorId != user.Id)
+            Vaults original = GetById(update.Id, user?.Id);
+            if (original.CreatorId != user?.Id)
             {
                 throw new Exception($"cannot edit {original.Name} you are not the creator");
             }
@@ -55,8 +55,8 @@ namespace Keepr.Services
 
         internal string Delete(int id, Account user)
         {
-            Vaults original = GetById(id, user.Id);
-            if (original.CreatorId != user.Id)
+            Vaults original = GetById(id, user?.Id);
+            if (original.CreatorId != user?.Id)
             {
                 throw new Exception($"you can't delete {original.Name}");
             }

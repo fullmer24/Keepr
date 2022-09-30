@@ -50,27 +50,21 @@ export default {
   setup() {
     async function getKeeps() {
       try {
-        await keepsService.getAccountKeeps();
+        await keepsService.getKeepsByProfileId(id);
       }
       catch (error) {
         logger.error(error.message);
       }
     }
-    // async function getVaults() {
-    //   try {
-    //     await vaultsService.getAccountVaults()
-    //   } catch (error) {
-    //     logger.error(error.message)
-    //   }
-    // }
     onMounted(() => {
       getKeeps();
-      // getVaults();
+      getProfile();
     });
     return {
       keeps: computed(() => AppState.myKeeps),
       vaults: computed(() => AppState.myVaults),
       account: computed(() => AppState.account),
+      profile: computed(() => AppState.profile),
     };
   },
   components: { KeepCard, VaultCard }

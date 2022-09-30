@@ -19,8 +19,6 @@ namespace Keepr.Services
         }
         internal VaultKeeps Create(VaultKeeps newVaultKeep)
         {
-            // TODO get the keep from the keeps repo
-
             Keeps keep = _keepsRepo.GetById(newVaultKeep.keepId);
             keep.Kept++;
             _keepsRepo.Update(keep);
@@ -45,7 +43,7 @@ namespace Keepr.Services
                 throw new Exception("no vaultKeep by that id");
             }
             Vaults vaults = _vaultsService.GetById(vaultKeeps.vaultId);
-            if (vaults.CreatorId != userInfo.Id)
+            if (vaults.CreatorId != userInfo?.Id)
             {
                 throw new Exception($"You can't do that {userInfo.Name}");
             }

@@ -30,9 +30,9 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function () {
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
 
-  // This getting my vaults which is in my account
   await vaultsService.getAccountVaults()
-  await keepsService.getAccountKeeps()
+  await keepsService.getAccountKeeps(AppState.account.id)
+
 
 
 })
