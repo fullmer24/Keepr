@@ -11,14 +11,12 @@
                         <div class="col-6">
                             <img class="img-fluid" :src="keep?.img" alt="">
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 text-primary">
                             <div>
-                                <span title="views" v-for="k in keep?.views" :key="k"><i
-                                        class="mdi mdi-eye"></i>{{keep?.views}}</span>
+                                <span title="views" :key="k"><i class="mdi mdi-eye"></i>{{keep?.views}}</span>
                             </div>
                             <div>
-                                <span title="kept" v-for="k in keep?.kept" :key="k"><i
-                                        class="mdi mdi-safe"></i>{{keep?.kept}}</span>
+                                <span title="kept" :key="k"><i class="mdi mdi-safe"></i>{{keep?.kept}}</span>
                             </div>
                             <div class="text-center">
                                 <div class="pt-2">
@@ -66,28 +64,28 @@ import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
-    // props: {
-    //     keep: { type: Object, required: true }
-    // },
+    props: {
+        keep: { type: Object, required: true }
+    },
     setup(props) {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
-            user: computed(() => AppState.user)
+            user: computed(() => AppState.user),
             // FIXME fix delete
             // NOTE references(instacult, art establishment, gregslist vue)
-            // async deleteKeep() {
-            //     try {
-            //         const yes = await Pop.confirm('Delete this keep?')
-            //         if (!yes) { return }
-            //         await keepsService.deleteKeep(props.id)
-            //         Pop.toast(`Keep ${keep.name} deleted`)
-            //         router.push({ name: 'Home' })
-            //     } catch (error) {
-            //         logger.error('[deleting keep]', error)
-            //         Pop.error(error)
-            //     }
-            // }
+            async deleteKeep() {
+                try {
+                    const yes = await Pop.confirm('Delete this keep?')
+                    if (!yes) { return }
+                    await keepsService.deleteKeep(props.id)
+                    Pop.toast(`Keep ${keep.name} deleted`)
+                    router.push({ name: 'Home' })
+                } catch (error) {
+                    logger.error('[deleting keep]', error)
+                    Pop.error(error)
+                }
+            }
         };
     },
 };
