@@ -32,7 +32,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function () {
 
   // This getting my vaults which is in my account
   await vaultsService.getAccountVaults()
-  await keepsService.getAccountKeeps();
+  await keepsService.getAccountKeeps()
 
 
 })
