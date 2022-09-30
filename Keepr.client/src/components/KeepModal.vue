@@ -53,7 +53,8 @@
                                     <!-- NOTE finish profile link -->
                                     <!-- <router-link :to="{ name: 'Profile', params:{id:profiles?.id} }"> -->
                                     <!-- <div title="Profile" class="list-group-item list-group-item-action hoverable"> -->
-                                    <img class="selectable creator-img p-s" :src="keep?.creator.picture" alt="">
+                                    <img @click="goToProfile(id)" class="selectable creator-img p-s"
+                                        :src="keep?.creator.picture" alt="">
                                     <!-- </div> -->
                                     <!-- </router-link> -->
                                 </div>
@@ -104,6 +105,9 @@ export default {
                     logger.error('save to vault', error)
                     Pop.error(error.message)
                 }
+            },
+            async goToProfile(id) {
+                router.push(`profiles/${id}`)
             }
         };
     },
