@@ -64,10 +64,12 @@ namespace Keepr.Services
             return $"{original.Name} was deleted";
         }
 
-        internal List<Vaults> getVaultsByProfileId(string id)
+        internal List<Vaults> getVaultsByProfileId(string id, string userId)
         {
+            // 
             List<Vaults> vaults = _vaultsRepo.getVaultsByProfileId(id);
-            vaults = vaults.FindAll(v => v.isPrivate == false);
+            // TODO removes private but should return private if it's yours, needs to take in user id
+            vaults = vaults.FindAll(v => v.isPrivate == false || v.CreatorId == userId);
 
             return vaults;
         }
