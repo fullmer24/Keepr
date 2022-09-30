@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main class="container-fluid bg-white">
+  <main class="main-body container-fluid bg-white">
     <router-view />
   </main>
 </template>
@@ -21,5 +21,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.main-body {
+  width: 100vw;
+}
+
 @import "./assets/scss/main.scss";
 </style>

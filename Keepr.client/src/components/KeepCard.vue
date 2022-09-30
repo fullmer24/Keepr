@@ -1,12 +1,13 @@
 <template>
-    <div class="row rounded elevation-4 justify-content-center selectable" @click="setActive">
+    <div class="position-relative rounded elevation-4 justify-content-center selectable" @click="setActive">
         <img class="keep-img" :src="keep.img" alt="">
-        <div class="p-2 col-6 col-md-9">
-            <h3 class="border-bottom mt-2 offset-1">{{keep.name}}</h3>
-        </div>
-        <div class="p-2 col-6 col-md-3">
-            <!-- FIXME make img background -->
-            <img class="rounded creator-img mt-3 mt-md-1" :src="keep.creator.picture" alt="">
+        <div class="position-absolute left-0 bottom-0 d-flex justify-content-between w-100">
+            <div class="p-2 col-6 col-md-9">
+                <h3 class="border-bottom mt-2 offset-1">{{keep.name}}</h3>
+            </div>
+            <div class="p-2 col-6 col-md-3">
+                <img class="rounded creator-img mt-3 mt-md-1" :src="keep.creator.picture" alt="">
+            </div>
         </div>
     </div>
     <KeepModal />
@@ -44,8 +45,7 @@ export default {
 
 <style scoped>
 .keep-img {
-    height: 175px;
-    width: 200px;
+    width: 100px;
     object-fit: cover;
 }
 

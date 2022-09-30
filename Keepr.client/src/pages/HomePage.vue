@@ -1,6 +1,6 @@
 <template>
-  <div class="row masonry">
-    <div class="col-6 col-md-3" v-for="k in keeps" :key="k.id">
+  <div class="masonry-with-columns mt-4">
+    <div v-for="k in keeps" :key="k.id">
       <KeepCard :keep="k" />
     </div>
   </div>
@@ -38,13 +38,26 @@ export default {
 
 
 <style scoped lang="scss">
-.masonry {
-  columns: 200px;
-  column-gap: 1em;
+.masonry-with-columns {
+  columns: 4 100px;
+  column-gap: 1rem;
+  width: 100%;
+  padding-left: 4px;
+  padding-right: 8px;
+
 
   div {
-    display: block;
-    margin-bottom: 1em;
+    width: 150px;
+    background: #EC985A;
+    background-size: contain;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
   }
 }
 </style>
