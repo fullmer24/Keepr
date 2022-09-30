@@ -29,9 +29,20 @@
                             <div class="row">
                                 <!-- NOTE do vault here -->
                                 <div v-if="user.isAuthenticated" title="add to vault" class="col-4 p-2 ms-md-4">
-                                    <button class="bg-white vaultTab">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Add to Vault
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <template v-for="vault in vaults" :key="vault.id">
+                                                <li><a class="dropdown-item">{{ vault.name }}</a></li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                    <!-- <button class="bg-white vaultTab">
                                         <p>ADD TO VAULT</p>
-                                    </button>
+                                    </button> -->
                                 </div>
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
@@ -57,7 +68,8 @@
 </template>
 <script>
 import { keepsService } from '../services/KeepsService.js';
-import { computed } from '@vue/runtime-core';
+import { computed, onMounted } from 'vue';
+import { vaultsService } from '../services/VaultsService.js';
 import { AppState } from '../AppState';
 import { logger } from '../utils/Logger.js';
 import { Modal } from 'bootstrap';
@@ -65,10 +77,22 @@ import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
     setup() {
+        async function getVaultsByProfileId() {
+            try {
+                await vaultsService.getVaultsByProfileId()
+            } catch (error) {
+                logger.error(error.message)
+            }
+        }
+
+        onMounted(() => {
+            getVaultsByProfileId();
+        });
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
             user: computed(() => AppState.user),
+            vaults: computed(() => AppState.vaults),
             async deleteKeep(id) {
                 try {
                     const yes = await Pop.confirm('Delete this keep?')
@@ -79,6 +103,15 @@ export default {
                     Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
                 } catch (error) {
                     logger.error('Delete Error', error)
+                    Pop.error(error.message)
+                }
+            },
+            async saveToVault(vaultId, keepId) {
+                try {
+                    console.log(vaultId)
+                    console.log(keepId)
+                } catch (error) {
+                    logger.error('save to vault', error)
                     Pop.error(error.message)
                 }
             }

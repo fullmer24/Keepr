@@ -1,21 +1,22 @@
 <template>
-    <!-- NOTE  profile info-->
+    <!-- NOTE  account info-->
     <div class="row p-4 m-2">
-        <img class="col-4 img" :src="profile.picture" alt="">
+        <img class="col-4 img" :src="account.picture" alt="">
         <div class="col-7 ms-3">
-            <h1 class="p-2 mt-4"><b>{{profile.name}}</b></h1>
+            <h1 class="p-2 mt-4"><b>{{account.name}}</b></h1>
             <h3>Vaults: </h3>
             <h3>Keeps: </h3>
         </div>
     </div>
     <!-- NOTE vaults -->
+    <!-- Add modal, and form-->
     <div class="row p-2">
         <h1 class="p-2">Vaults<button class="mdi mdi-plus p-2 ms-4"></button></h1>
     </div>
     <div class="row">
         <!-- FIXME vaults not getting accessed -->
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
-            <div v-if="profile.id == vault?.creatorId">
+            <div v-if="account.id == v?.creatorId">
                 <VaultCard :vault="v" />
             </div>
         </div>
@@ -23,11 +24,12 @@
     </div>
     <!-- NOTE keeps -->
     <div class="row p-2">
+        <!-- NOTE add modal and form -->
         <h1 class="p-2">Keeps<button class="mdi mdi-plus p-2 ms-4"></button></h1>
         <div class="row">
             <!-- FIXME keeps not rendering and v-if not working-->
             <div class="col-6 col-md-3 my-4 p-4" v-for="k in keeps" :key="k.id">
-                <div v-if="profile.id == keep?.creatorId">
+                <div v-if="account.id == k?.creatorId">
                     <KeepCard :keep="k" />
                 </div>
             </div>
@@ -56,7 +58,7 @@ export default {
         }
         async function getVaults() {
             try {
-                await vaultsService.getVaults()
+                await vaultsService.getVaultsByProfileId()
             } catch (error) {
                 logger.error(error.message)
             }
@@ -66,9 +68,9 @@ export default {
             getVaults();
         });
         return {
-            keep: computed(() => AppState.keeps),
-            vault: computed(() => AppState.vaults),
-            account: computed(() => AppState.account)
+            keeps: computed(() => AppState.keeps),
+            vaults: computed(() => AppState.vaults),
+            account: computed(() => AppState.account),
         };
     },
     components: { KeepCard, VaultCard }
@@ -80,14 +82,14 @@ img {
     max-width: 250px;
 }
 
-.profile {
+.account {
     display: grid;
     height: 80vh;
     place-content: center;
     text-align: center;
     user-select: none;
 
-    .profile-card {
+    .account-card {
         width: 50vw;
 
         >img {
