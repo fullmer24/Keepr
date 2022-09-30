@@ -10,7 +10,8 @@
     <!-- NOTE vaults -->
     <!-- Add modal, and form-->
     <div class="row p-2">
-        <h1 class="p-2">Vaults<button class="mdi mdi-plus p-2 ms-4"></button></h1>
+        <h1 class="p-2">Vaults<button data-bs-toggle="modal" data-bs-target="VaultFormModal" @click="createVault"
+                class="mdi mdi-plus p-2 ms-4"></button></h1>
     </div>
     <div class="row">
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
@@ -23,7 +24,8 @@
     <!-- NOTE keeps -->
     <div class="row p-2">
         <!-- NOTE add modal and form -->
-        <h1 class="p-2">Keeps<button class="mdi mdi-plus p-2 ms-4"></button></h1>
+        <h1 class="p-2">Keeps<button @click="createKeep" data-bs-toggle="modal" data-bs-target="KeepFormModal"
+                class="mdi mdi-plus p-2 ms-4"></button></h1>
         <div class="row">
             <!-- FIXME keeps not rendering and v-if not working-->
             <div class="col-6 col-md-3 my-4 p-4" v-for="k in keeps" :key="k.id">

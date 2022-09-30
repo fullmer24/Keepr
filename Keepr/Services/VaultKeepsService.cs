@@ -17,8 +17,9 @@ namespace Keepr.Services
             _vaultsService = vaultsService;
             _keepsRepo = keepsRepo;
         }
-        internal VaultKeeps Create(VaultKeeps newVaultKeep)
+        internal VaultKeeps Create(VaultKeeps newVaultKeep, int id, string userId)
         {
+            _vaultsService.GetById(id, userId);
             Keeps keep = _keepsRepo.GetById(newVaultKeep.keepId);
             keep.Kept++;
             _keepsRepo.Update(keep);
@@ -27,6 +28,7 @@ namespace Keepr.Services
         }
         internal List<VaultKeepsVM> GetKeepByVaultId(int id, string userId)
         {
+            _vaultsService.GetById(id, userId);
             List<VaultKeepsVM> vaultKeeps = _vaultKeepsRepo.GetKeepsByVaultId(id);
             if (vaultKeeps == null)
             {

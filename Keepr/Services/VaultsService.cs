@@ -66,7 +66,11 @@ namespace Keepr.Services
 
         internal List<Vaults> getVaultsByProfileId(string id)
         {
-            return _vaultsRepo.getVaultsByProfileId(id);
+            List<Vaults> vaults = _vaultsRepo.getVaultsByProfileId(id);
+            vaults = vaults.FindAll(v => v.isPrivate == false);
+
+            return vaults;
         }
+        // TODO looks at restaurants GetAll service layer 
     }
 }
