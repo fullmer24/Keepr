@@ -13,10 +13,10 @@
                         </div>
                         <div class="col-6 text-primary">
                             <div>
-                                <span title="views" :key="k"><i class="mdi mdi-eye"></i>{{keep?.views}}</span>
+                                <span title="views"><i class="mdi mdi-eye"></i>{{keep?.views}}</span>
                             </div>
                             <div>
-                                <span title="kept" :key="k"><i class="mdi mdi-safe"></i>{{keep?.kept}}</span>
+                                <span title="kept"><i class="mdi mdi-safe"></i>{{keep?.kept}}</span>
                             </div>
                             <div class="text-center">
                                 <div class="pt-2">
@@ -33,10 +33,9 @@
                                         <p>ADD TO VAULT</p>
                                     </button>
                                 </div>
-                                <!-- FIXME fix delete -->
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
-                                    <button @click="deleteKeep(props)"><i class="mdi mdi-delete p-s"></i></button>
+                                    <button @click="deleteKeep(keep.id)"><i class="mdi mdi-delete p-s"></i></button>
                                 </div>
                                 <div title="view profile" class="col-2 p-2 ms-3 ms-md-5">
                                     <!-- NOTE finish profile link -->
@@ -61,29 +60,26 @@ import { keepsService } from '../services/KeepsService.js';
 import { computed } from '@vue/runtime-core';
 import { AppState } from '../AppState';
 import { logger } from '../utils/Logger.js';
+import { Modal } from 'bootstrap';
 import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
-    props: {
-        keep: { type: Object, required: true }
-    },
-    setup(props) {
+    setup() {
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
             user: computed(() => AppState.user),
-            // FIXME fix delete
-            // NOTE references(instacult, art establishment, gregslist vue)
-            async deleteKeep() {
+            async deleteKeep(id) {
                 try {
                     const yes = await Pop.confirm('Delete this keep?')
                     if (!yes) { return }
-                    await keepsService.deleteKeep(props.id)
-                    Pop.toast(`Keep ${keep.name} deleted`)
+                    await keepsService.deleteKeep(id)
+                    Pop.toast(`Keep deleted`)
                     router.push({ name: 'Home' })
+                    Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
                 } catch (error) {
-                    logger.error('[deleting keep]', error)
-                    Pop.error(error)
+                    logger.error('Delete Error', error)
+                    Pop.error(error.message)
                 }
             }
         };
