@@ -9,6 +9,13 @@ class VaultsService {
         AppState.vaults = res.data
         logger.log('appstate', AppState.vaults)
     }
+
+    async getVaultsByProfileId() {
+        const res = await api.get('account/vaults')
+        logger.log(res.data, 'getting vaults for profile')
+        AppState.vaults = res.data
+        logger.log('appstate', AppState.vaults)
+    }
 }
 
 export const vaultsService = new VaultsService()

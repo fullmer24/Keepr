@@ -16,7 +16,7 @@
   <div class="row">
     <!-- FIXME vaults not getting accessed -->
     <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
-      <div v-if="account.id == vault?.creatorId">
+      <div v-if="account.id == v?.creatorId">
         <VaultCard :vault="v" />
       </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="row">
       <!-- FIXME keeps not rendering and v-if not working-->
       <div class="col-6 col-md-3 my-4 p-4" v-for="k in keeps" :key="k.id">
-        <div v-if="account.id == keep?.creatorId">
+        <div v-if="account.id == k?.creatorId">
           <KeepCard :keep="k" />
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
     }
     async function getVaults() {
       try {
-        await vaultsService.getVaults()
+        await vaultsService.getVaultsByProfileId()
       } catch (error) {
         logger.error(error.message)
       }
@@ -68,9 +68,9 @@ export default {
       getVaults();
     });
     return {
-      keep: computed(() => AppState.keeps),
-      vault: computed(() => AppState.vaults),
-      account: computed(() => AppState.account)
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults),
+      account: computed(() => AppState.account),
     };
   },
   components: { KeepCard, VaultCard }
