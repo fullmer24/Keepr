@@ -56,6 +56,7 @@ export default {
                 logger.error(error.message);
             }
         }
+        // This is going in the service and going to profiles with profile id
         async function getVaults() {
             try {
                 await vaultsService.getVaultsByProfileId()

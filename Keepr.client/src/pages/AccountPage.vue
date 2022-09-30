@@ -56,20 +56,20 @@ export default {
         logger.error(error.message);
       }
     }
-    async function getVaults() {
-      try {
-        await vaultsService.getVaultsByProfileId()
-      } catch (error) {
-        logger.error(error.message)
-      }
-    }
+    // async function getVaults() {
+    //   try {
+    //     await vaultsService.getAccountVaults()
+    //   } catch (error) {
+    //     logger.error(error.message)
+    //   }
+    // }
     onMounted(() => {
       getKeeps();
-      getVaults();
+      // getVaults();
     });
     return {
       keeps: computed(() => AppState.keeps),
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.myVaults),
       account: computed(() => AppState.account),
     };
   },

@@ -11,7 +11,7 @@
                         <div class="col-6">
                             <img class="img-fluid" :src="keep?.img" alt="">
                         </div>
-                        <div class="col-6 text-primary">
+                        <div class="col-6 text-dark">
                             <div>
                                 <span title="views"><i class="mdi mdi-eye"></i>{{keep?.views}}</span>
                             </div>
@@ -35,14 +35,11 @@
                                             Add to Vault
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <template v-for="vault in vaults" :key="vault.id">
-                                                <li><a class="dropdown-item">{{ vault.name }}</a></li>
+                                            <template v-for="v in vaults" :key="v.id">
+                                                <li><a class="dropdown-item">{{ v.name }}</a></li>
                                             </template>
                                         </ul>
                                     </div>
-                                    <!-- <button class="bg-white vaultTab">
-                                        <p>ADD TO VAULT</p>
-                                    </button> -->
                                 </div>
                                 <div title="delete keep" class="col-2 p-2 ms-4 ms-md-5"
                                     v-if="account.id == keep?.creatorId">
@@ -77,22 +74,22 @@ import Pop from '../utils/Pop.js';
 import { router } from '../router.js';
 export default {
     setup() {
-        async function getVaultsByProfileId() {
-            try {
-                await vaultsService.getVaultsByProfileId()
-            } catch (error) {
-                logger.error(error.message)
-            }
-        }
+        // async function getVaultsByAccountId() {
+        //     try {
+        //         await vaultsService.getVaultsByAccountId()
+        //     } catch (error) {
+        //         logger.error(error.message)
+        //     }
+        // }
 
-        onMounted(() => {
-            getVaultsByProfileId();
-        });
+        // onMounted(() => {
+        //     getVaultsByAccountId();
+        // });
         return {
             keep: computed(() => AppState.activeKeep),
             account: computed(() => AppState.account),
             user: computed(() => AppState.user),
-            vaults: computed(() => AppState.vaults),
+            vaults: computed(() => AppState.myVaults),
             async deleteKeep(id) {
                 try {
                     const yes = await Pop.confirm('Delete this keep?')
@@ -100,7 +97,7 @@ export default {
                     await keepsService.deleteKeep(id)
                     Pop.toast(`Keep deleted`)
                     router.push({ name: 'Home' })
-                    Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
+                    // Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
                 } catch (error) {
                     logger.error('Delete Error', error)
                     Pop.error(error.message)
