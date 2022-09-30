@@ -17,7 +17,7 @@ class KeepsService {
         AppState.keeps = AppState.keeps.filter(k => k.id != id)
     }
     async getAccountKeeps() {
-        const res = await api.get(`profile/${id}/keeps`)
+        const res = await api.get(`api/profile/${id}/keeps`)
         logger.log(res.data, 'getting keeps for profile')
         AppState.myKeeps = res.data
         logger.log('appstate', AppState.myKeeps)

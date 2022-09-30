@@ -1,4 +1,5 @@
 <template>
+    <!-- NOTE  account info-->
     <div class="row p-4 m-2">
         <img class="col-4 img" :src="profiles.picture" alt="">
         <div class="col-7 ms-3">
@@ -15,7 +16,7 @@
     <div class="row">
         <!-- FIXME vaults not getting accessed -->
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
-            <div v-if="profiles.id == v?.creatorId">
+            <div v-if="account.id == v?.creatorId">
                 <VaultCard :vault="v" />
             </div>
         </div>
