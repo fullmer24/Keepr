@@ -3,8 +3,8 @@
         <img class="col-4 img" :src="profile.picture" alt="">
         <div class="col-7 ms-3">
             <h1 class="p-2 mt-4"><b>{{profile.name}}</b></h1>
-            <h3>Vaults: </h3>
-            <h3>Keeps: </h3>
+            <h3>Vaults: {{vaults.length}} </h3>
+            <h3>Keeps: {{keeps.length}}</h3>
         </div>
     </div>
     <!-- NOTE vaults -->
@@ -15,23 +15,18 @@
     </div>
     <div class="row">
         <div class="col-6 col-mdm-3 my-4 p-4" v-for="v in vaults" :key="v.id">
-            <div v-if="account.id == v?.creatorId">
-                <VaultCard :vault="v" />
-            </div>
+            <VaultCard :vault="v" />
         </div>
 
     </div>
     <!-- NOTE keeps -->
     <div class="row p-2">
         <!-- NOTE add modal and form -->
-        <h1 class="p-2">Keeps<button @click="createKeep" data-bs-toggle="modal" data-bs-target="KeepFormModal"
+        <h1 class="p-2">Keeps<button @click="createKeep" data-bs-toggle="modal" data-bs-target="#keepFormModal"
                 class="mdi mdi-plus p-2 ms-4"></button></h1>
         <div class="row">
-            <!-- FIXME keeps not rendering and v-if not working-->
             <div class="col-6 col-md-3 my-4 p-4" v-for="k in keeps" :key="k.id">
-                <div v-if="account.id == k?.creatorId">
-                    <KeepCard :keep="k" />
-                </div>
+                <KeepCard :keep="k" />
             </div>
         </div>
     </div>

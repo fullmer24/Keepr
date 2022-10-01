@@ -4,14 +4,14 @@
     <img class="col-4 img" :src="account.picture" alt="">
     <div class="col-7 ms-3">
       <h1 class="p-2 mt-4"><b>{{account.name}}</b></h1>
-      <h3>Vaults: </h3>
-      <h3>Keeps: </h3>
+      <h3>Vaults: {{vaults.length}} </h3>
+      <h3>Keeps: {{keeps.length}}</h3>
     </div>
   </div>
   <!-- NOTE vaults -->
   <!-- Add modal, and form-->
   <div class="row p-2">
-    <h1 class="p-2">Vaults<button data-bs-toggle="modal" data-bs-target="VaultFormModal"
+    <h1 class="p-2">Vaults<button data-bs-toggle="modal" data-bs-target="#vaultFormModal"
         class="mdi mdi-plus p-2 ms-4"></button></h1>
   </div>
   <div class="row">
@@ -26,7 +26,7 @@
   <!-- NOTE keeps -->
   <div class="row p-2">
     <!-- NOTE add modal and form -->
-    <h1 class="p-2">Keeps<button data-bs-toggle="modal" data-bs-target="KeepFormModal"
+    <h1 class="p-2">Keeps<button data-bs-toggle="modal" data-bs-target="#keepFormModal"
         class="mdi mdi-plus p-2 ms-4"></button></h1>
     <div class="row">
       <!-- FIXME keeps not rendering and v-if not working-->
@@ -53,6 +53,7 @@ export default {
     async function getKeeps() {
       try {
         await keepsService.getKeepsByProfileId(id);
+        await vaultsService.getAccountVaults();
       }
       catch (error) {
         logger.error(error.message);
@@ -60,7 +61,6 @@ export default {
     }
     onMounted(() => {
       getKeeps();
-      getProfile();
     });
     return {
       keeps: computed(() => AppState.myKeeps),
